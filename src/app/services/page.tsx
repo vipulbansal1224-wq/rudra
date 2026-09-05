@@ -3,8 +3,8 @@ import { getContent } from "@/lib/getContent";
 
 export const dynamic = 'force-dynamic';
 
-export default function Page() {
-  const content = getContent();
+export default async function Page() {
+  const content = await getContent();
   const services = content.services || [];
 
   return (

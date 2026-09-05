@@ -3,8 +3,8 @@ import { getContent } from "@/lib/getContent";
 
 export const dynamic = 'force-dynamic';
 
-export default function Home() {
-  const content = getContent();
+export default async function Home() {
+  const content = await getContent();
   const hero = content.hero || {};
   const about = content.about || {};
   const services = content.services || [];

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getContent } from "@/lib/getContent";
 
-export default function Navbar() {
-  const content = getContent();
+export default async function Navbar() {
+  const content = await getContent();
   const contact = content.contact || {};
 
   return (

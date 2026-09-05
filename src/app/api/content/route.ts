@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { kv } from '@vercel/kv';
 import { getContent } from '@/lib/getContent';
-
-const filePath = path.join(process.cwd(), 'src', 'data', 'content.json');
 
 export async function GET() {
   try {
-    const data = getContent();
+    const data = await getContent();
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -27,16 +24,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'No data provided' }, { status: 400 });
     }
 
-    // Backup previous content
-    const backupPath = path.join(process.cwd(), 'src', 'data', `content.backup-${Date.now()}.json`);
-    if (fs.existsSync(filePath)) {
-      fs.copyFileSync(filePath, backupPath);
-    }
+    // Save new content to Vercel KV
+    await kv.set('rudraksh-content', body.data);
 
-    // Save new content
-    fs.writeFileSync(filePath, JSON.stringify(body.data, null, 2), 'utf8');
-
-    return NextResponse.json({ success: true, message: 'Content updated successfully' });
+    return NextResponse.json({ success: true, message: 'Content updated successfully in Vercel KV' });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }

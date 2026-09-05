@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { getContent } from "@/lib/getContent";
 
-export default function Footer() {
-  const content = getContent();
+export default async function Footer() {
+  const content = await getContent();
   const contact = content.contact || {};
 
   return (
