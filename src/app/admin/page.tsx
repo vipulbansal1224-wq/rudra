@@ -62,6 +62,19 @@ export default function AdminPage() {
     setSaving(false);
   };
 
+  // Helper for arrays (services, gallery, partners)
+  const handleArrayChange = (section: string, index: number, field: string, value: any) => {
+    const newData = { ...data };
+    newData[section][index][field] = value;
+    setData(newData);
+  };
+
+  const handleServiceItemChange = (serviceIndex: number, itemIndex: number, value: string) => {
+    const newData = { ...data };
+    newData.services[serviceIndex].items[itemIndex] = value;
+    setData(newData);
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -91,14 +104,14 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8 text-black">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-sm p-6 md:p-8">
-        <div className="flex justify-between items-center mb-8 border-b pb-4">
+        <div className="flex justify-between items-center mb-8 border-b pb-4 sticky top-0 bg-white z-10 pt-4">
           <h1 className="text-3xl font-bold text-gray-800">Content Management</h1>
           <div className="flex items-center space-x-4">
             {message && <span className={`text-sm font-semibold ${message.includes("Error") ? "text-red-500" : "text-green-600"}`}>{message}</span>}
             <button 
               onClick={handleSave} 
               disabled={saving}
-              className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-2 px-6 rounded-lg transition-colors"
+              className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-2 px-6 rounded-lg transition-colors shadow-md"
             >
               {saving ? "Saving..." : "Save Changes"}
             </button>
@@ -226,7 +239,124 @@ export default function AdminPage() {
             </div>
           </section>
 
-          <p className="text-sm text-gray-500 italic mt-8">Note: Advanced settings (Services, Partners, Gallery) are stored in the JSON but not shown in this simple editor yet. They can be added here easily.</p>
+          {/* Services Section */}
+          <section className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+            <h2 className="text-xl font-bold mb-4 text-gray-800">Services / Solutions</h2>
+            <div className="space-y-6">
+              {data.services?.map((service: any, sIdx: number) => (
+                <div key={sIdx} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                  <h3 className="font-bold text-md mb-4 text-primary">Service {sIdx + 1}: {service.title}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">Title</label>
+                      <input 
+                        type="text" 
+                        value={service.title} 
+                        onChange={(e) => handleArrayChange('services', sIdx, 'title', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">Image URL</label>
+                      <input 
+                        type="text" 
+                        value={service.image} 
+                        onChange={(e) => handleArrayChange('services', sIdx, 'image', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">Description</label>
+                      <textarea 
+                        value={service.description} 
+                        onChange={(e) => handleArrayChange('services', sIdx, 'description', e.target.value)}
+                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
+                        rows={2}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-2">Service Items (Bullet points)</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {service.items?.map((item: string, iIdx: number) => (
+                        <input 
+                          key={iIdx}
+                          type="text" 
+                          value={item} 
+                          onChange={(e) => handleServiceItemChange(sIdx, iIdx, e.target.value)}
+                          className="w-full border border-gray-300 rounded px-3 py-2 text-xs bg-gray-50"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Gallery Section */}
+          <section className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+            <h2 className="text-xl font-bold mb-4 text-gray-800">Gallery Images</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {data.gallery?.map((img: any, gIdx: number) => (
+                <div key={gIdx} className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm text-xs space-y-2">
+                  <div className="w-full h-24 bg-gray-100 rounded overflow-hidden mb-2 relative flex items-center justify-center">
+                    <img src={img.src} alt={img.title} className="max-h-full max-w-full object-cover" />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-gray-500 mb-1">Image URL</label>
+                    <input 
+                      type="text" 
+                      value={img.src} 
+                      onChange={(e) => handleArrayChange('gallery', gIdx, 'src', e.target.value)}
+                      className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-50"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-gray-500 mb-1">Caption / Title</label>
+                    <input 
+                      type="text" 
+                      value={img.title} 
+                      onChange={(e) => handleArrayChange('gallery', gIdx, 'title', e.target.value)}
+                      className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-50"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Partners Section */}
+          <section className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+            <h2 className="text-xl font-bold mb-4 text-gray-800">Partners / Brands</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {data.partners?.map((partner: any, pIdx: number) => (
+                <div key={pIdx} className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm text-xs space-y-2">
+                  <div className="w-full h-16 bg-gray-100 rounded overflow-hidden flex items-center justify-center relative">
+                    <img src={partner.src} alt={partner.name} className="max-h-full max-w-full object-contain" />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-gray-500 mb-1">Logo URL</label>
+                    <input 
+                      type="text" 
+                      value={partner.src} 
+                      onChange={(e) => handleArrayChange('partners', pIdx, 'src', e.target.value)}
+                      className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-50"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-gray-500 mb-1">Brand Name</label>
+                    <input 
+                      type="text" 
+                      value={partner.name} 
+                      onChange={(e) => handleArrayChange('partners', pIdx, 'name', e.target.value)}
+                      className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-50"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
         </div>
       </div>
