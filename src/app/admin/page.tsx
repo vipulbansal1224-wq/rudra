@@ -63,6 +63,47 @@ export default function AdminPage() {
     setSaving(false);
   };
 
+  // Image Compression Helper
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, section: string, index: number, field: string) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+        
+        // Compress to JPEG with 0.7 quality
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+        handleArrayChange(section, index, field, dataUrl);
+      };
+    };
+  };
+
   // Helper for arrays (services, gallery, partners)
   const handleArrayChange = (section: string, index: number, field: string, value: any) => {
     const newData = { ...data };
@@ -245,49 +286,56 @@ export default function AdminPage() {
             <h2 className="text-xl font-bold mb-4 text-gray-800">Services / Solutions</h2>
             <div className="space-y-6">
               {data.services?.map((service: any, sIdx: number) => (
-                <div key={sIdx} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
-                  <h3 className="font-bold text-md mb-4 text-primary">Service {sIdx + 1}: {service.title}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">Title</label>
-                      <input 
-                        type="text" 
-                        value={service.title} 
-                        onChange={(e) => handleArrayChange('services', sIdx, 'title', e.target.value)}
-                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
-                      />
+                <div key={sIdx} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex flex-col md:flex-row gap-6">
+                  {/* Service Image Preview */}
+                  <div className="w-full md:w-1/3 flex flex-col">
+                    <div className="w-full h-48 bg-gray-100 rounded-lg overflow-hidden relative mb-2 flex items-center justify-center border border-gray-200">
+                      <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
                     </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">Image URL</label>
-                      <input 
-                        type="text" 
-                        value={service.image} 
-                        onChange={(e) => handleArrayChange('services', sIdx, 'image', e.target.value)}
-                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">Description</label>
-                      <textarea 
-                        value={service.description} 
-                        onChange={(e) => handleArrayChange('services', sIdx, 'description', e.target.value)}
-                        className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
-                        rows={2}
-                      />
-                    </div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">Upload New Image</label>
+                    <input 
+                      type="file" 
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'services', sIdx, 'image')}
+                      className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    />
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-2">Service Items (Bullet points)</label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {service.items?.map((item: string, iIdx: number) => (
+
+                  <div className="w-full md:w-2/3">
+                    <h3 className="font-bold text-md mb-4 text-primary">Service {sIdx + 1}: {service.title}</h3>
+                    <div className="grid grid-cols-1 gap-4 mb-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1">Title</label>
                         <input 
-                          key={iIdx}
                           type="text" 
-                          value={item} 
-                          onChange={(e) => handleServiceItemChange(sIdx, iIdx, e.target.value)}
-                          className="w-full border border-gray-300 rounded px-3 py-2 text-xs bg-gray-50"
+                          value={service.title} 
+                          onChange={(e) => handleArrayChange('services', sIdx, 'title', e.target.value)}
+                          className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
                         />
-                      ))}
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1">Description</label>
+                        <textarea 
+                          value={service.description} 
+                          onChange={(e) => handleArrayChange('services', sIdx, 'description', e.target.value)}
+                          className="w-full border border-gray-300 rounded px-3 py-2 text-sm bg-gray-50"
+                          rows={2}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-500 mb-2">Service Items (Bullet points)</label>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {service.items?.map((item: string, iIdx: number) => (
+                          <input 
+                            key={iIdx}
+                            type="text" 
+                            value={item} 
+                            onChange={(e) => handleServiceItemChange(sIdx, iIdx, e.target.value)}
+                            className="w-full border border-gray-300 rounded px-3 py-2 text-xs bg-gray-50"
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -302,19 +350,19 @@ export default function AdminPage() {
               {data.gallery?.map((img: any, gIdx: number) => (
                 <div key={gIdx} className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm text-xs space-y-2">
                   <div className="w-full h-24 bg-gray-100 rounded overflow-hidden mb-2 relative flex items-center justify-center">
-                    <img src={img.src} alt={img.title} className="max-h-full max-w-full object-cover" />
+                    <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <label className="block font-semibold text-gray-500 mb-1">Image URL</label>
+                    <label className="block font-semibold text-gray-500 mb-1">Upload New Image</label>
                     <input 
-                      type="text" 
-                      value={img.src} 
-                      onChange={(e) => handleArrayChange('gallery', gIdx, 'src', e.target.value)}
-                      className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-50"
+                      type="file" 
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'gallery', gIdx, 'src')}
+                      className="w-full text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-gray-500 mb-1">Caption / Title</label>
+                    <label className="block font-semibold text-gray-500 mb-1 mt-2">Caption / Title</label>
                     <input 
                       type="text" 
                       value={img.title} 
@@ -333,20 +381,20 @@ export default function AdminPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {data.partners?.map((partner: any, pIdx: number) => (
                 <div key={pIdx} className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm text-xs space-y-2">
-                  <div className="w-full h-16 bg-gray-100 rounded overflow-hidden flex items-center justify-center relative">
+                  <div className="w-full h-16 bg-gray-100 rounded overflow-hidden flex items-center justify-center relative border border-gray-200">
                     <img src={partner.src} alt={partner.name} className="max-h-full max-w-full object-contain" />
                   </div>
                   <div>
-                    <label className="block font-semibold text-gray-500 mb-1">Logo URL</label>
+                    <label className="block font-semibold text-gray-500 mb-1">Upload New Logo</label>
                     <input 
-                      type="text" 
-                      value={partner.src} 
-                      onChange={(e) => handleArrayChange('partners', pIdx, 'src', e.target.value)}
-                      className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-50"
+                      type="file" 
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'partners', pIdx, 'src')}
+                      className="w-full text-xs text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-gray-500 mb-1">Brand Name</label>
+                    <label className="block font-semibold text-gray-500 mb-1 mt-2">Brand Name</label>
                     <input 
                       type="text" 
                       value={partner.name} 
