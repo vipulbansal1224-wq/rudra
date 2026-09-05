@@ -1,7 +1,52 @@
 import Link from "next/link";
+import { getContent } from "@/lib/getContent";
 
 export default function Footer() {
+  const content = getContent();
+  const contact = content.contact || {};
+
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8"><div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12"><div><div className="flex items-center mb-6"><span className="text-2xl font-black tracking-tight text-white uppercase">Rudraksh Enterprises</span></div><p className="text-gray-400 text-sm leading-relaxed mb-6">Established in 2023, we specialize in offering integration of Audio-Visual Systems, Institutional Furniture, IT Infrastructure, and CCTV Surveillance.</p><div className="text-xs text-gray-500">┬⌐ 2026 Rudraksh Enterprises. All rights reserved.</div></div><div><h4 className="text-white font-bold text-lg mb-6 border-b border-gray-800 pb-2">Quick Links</h4><ul className="space-y-3 text-sm"><li><Link className="hover:text-secondary transition-colors" href="/">Home Page</Link></li><li><Link className="hover:text-secondary transition-colors" href="/services">Key Solutions</Link></li><li><Link className="hover:text-secondary transition-colors" href="/about">About Us Profile</Link></li><li><Link className="hover:text-secondary transition-colors" href="/contact">Contact Desk</Link></li></ul></div><div><h4 className="text-white font-bold text-lg mb-6 border-b border-gray-800 pb-2">Corporate Office</h4><ul className="space-y-4 text-sm"><li className="flex items-start"><svg className="lucide lucide-map-pin w-5 h-5 text-secondary mr-3 flex-shrink-0 mt-0.5" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg><span className="text-gray-400">34 A, SD Complex, Opposite Housing Board, Distt Panchkula, Haryana, 133302</span></li><li className="flex items-center"><svg className="lucide lucide-phone w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span className="text-gray-400">+91 97790 74420, +91 95881 00159</span></li><li className="flex items-center"><svg className="lucide lucide-mail w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span className="text-gray-400">info@rudrakashenterprises.com</span></li></ul></div></div><div className="max-w-7xl mx-auto px-4 mt-12 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">Designed for Presentation &amp; Client Review. Certified Solutions Provider.</div></footer>
+    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div>
+          <div className="flex items-center mb-6">
+            <span className="text-2xl font-black tracking-tight text-white uppercase">Rudraksh Enterprises</span>
+          </div>
+          <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            Established in 2023, we specialize in offering integration of Audio-Visual Systems, Institutional Furniture, IT Infrastructure, and CCTV Surveillance.
+          </p>
+          <div className="text-xs text-gray-500">© 2026 Rudraksh Enterprises. All rights reserved.</div>
+        </div>
+        <div>
+          <h4 className="text-white font-bold text-lg mb-6 border-b border-gray-800 pb-2">Quick Links</h4>
+          <ul className="space-y-3 text-sm">
+            <li><Link className="hover:text-secondary transition-colors" href="/">Home Page</Link></li>
+            <li><Link className="hover:text-secondary transition-colors" href="/services">Key Solutions</Link></li>
+            <li><Link className="hover:text-secondary transition-colors" href="/about">About Us Profile</Link></li>
+            <li><Link className="hover:text-secondary transition-colors" href="/contact">Contact Desk</Link></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-white font-bold text-lg mb-6 border-b border-gray-800 pb-2">Corporate Office</h4>
+          <ul className="space-y-4 text-sm">
+            <li className="flex items-start">
+              <svg className="lucide lucide-map-pin w-5 h-5 text-secondary mr-3 flex-shrink-0 mt-0.5" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span className="text-gray-400">{contact.address || "34 A, SD Complex, Opposite Housing Board, Distt Panchkula, Haryana, 133302"}</span>
+            </li>
+            <li className="flex items-center">
+              <svg className="lucide lucide-phone w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span className="text-gray-400">{contact.phone1}, {contact.phone2}</span>
+            </li>
+            <li className="flex items-center">
+              <svg className="lucide lucide-mail w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+              <span className="text-gray-400">{contact.email}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 mt-12 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
+        Designed for Presentation & Client Review. Certified Solutions Provider.
+      </div>
+    </footer>
   );
 }

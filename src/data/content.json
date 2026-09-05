@@ -1,0 +1,167 @@
+{
+  "contact": {
+    "phone1": "+91 97790 74420",
+    "phone2": "+91 95881 00159",
+    "email": "info@rudrakashenterprises.com",
+    "address": "34 A, SD Complex, Opposite Housing Board, Distt Panchkula, Haryana, 133302",
+    "workingHours": "Monday - Saturday (09:30 AM - 06:30 PM)"
+  },
+  "hero": {
+    "tagline": "ISO 9001:2015 Certified Company",
+    "title": "Complete Technology & Infrastructure Solutions",
+    "subtitle": "We supply, install, and integrate Audio-Visual Systems, Workspace Furniture, IT Solutions, and Surveillance setups for corporate, education, and government sectors."
+  },
+  "about": {
+    "title": "Empowering Modern Workspaces Since 2023",
+    "description1": "Rudraksh Enterprises provides reliable, innovative, and cost-effective technology and infrastructure solutions to educational institutions, government organizations, corporate offices, and various business sectors.",
+    "description2": "We are a professionally managed dealer and solution provider. Our primary objective is to understand our customers' requirements and provide complete solutions—from product selection and supply to installation, integration, and after-sales support."
+  },
+  "services": [
+    {
+      "id": "av",
+      "title": "Audio-Visual Integration",
+      "image": "/api/images/uploaded_1787984695233_image_7.jpeg",
+      "imgHeight": "h-64",
+      "description": "High-performance AV integration to make communication and collaboration seamless across boardrooms, seminar halls, and smart classrooms.",
+      "items": [
+        "Conference & Board Rooms",
+        "Meeting Rooms",
+        "Classrooms & Training Rooms",
+        "Auditoriums & Seminar Halls",
+        "Video Conferencing Systems",
+        "Public Address & Sound Reinforcement",
+        "Digital Displays & Interactive Panels",
+        "Professional Audio Systems (Mic, Amp, Speakers & DSP)",
+        "PTZ Cameras and AV Control Systems"
+      ]
+    },
+    {
+      "id": "furniture",
+      "title": "Institutional Furniture",
+      "image": "/api/images/uploaded_1787984712856_iamge_8.jpeg",
+      "imgHeight": "h-64",
+      "description": "Modern, ergonomically designed workspace and classroom furniture that integrates seamlessly with technology and wire management systems.",
+      "items": [
+        "Conference & Boardroom Tables & Chairs",
+        "Training Room Furniture",
+        "Classroom Desk & Bench Setups",
+        "Auditoriums & Seminar Hall Seating",
+        "Lecterns & Smart Podiums",
+        "AV Server Racks & Cabinets",
+        "Customised Institutional Furniture Solutions",
+        "Cable Management & Smart Desk Integration"
+      ]
+    },
+    {
+      "id": "it",
+      "title": "IT Solutions",
+      "image": "/api/images/uploaded_1787984761518_image_4.jpeg",
+      "imgHeight": "h-64",
+      "description": "Complete computational hardware and network infrastructure setups from leading brands to keep your workflows responsive and secure.",
+      "items": [
+        "Desktop & Laptop Computers",
+        "Servers & Storage Solutions",
+        "Networking Switched & Router Products",
+        "Printers & Imaging Peripherals",
+        "UPS & Power Backups Solutions",
+        "Structured LAN/Fiber Networking",
+        "IT Accessories & Cables",
+        "Complete IT Infrastructure Hardware"
+      ]
+    },
+    {
+      "id": "security",
+      "title": "CCTV & Security Surveillance",
+      "image": "/api/images/uploaded_1787984767689_cctv.jpeg",
+      "imgHeight": "h-64",
+      "description": "Reliable surveillance and security solutions for school campuses, warehousing facilities, corporate corridors, and secure perimeters.",
+      "items": [
+        "IP & Analog CCTV Cameras",
+        "PTZ Surveillance Cameras",
+        "Network Video Recorders (NVR)",
+        "Digital Video Recorders (DVR)",
+        "Video Management Systems (VMS)",
+        "Biometric & Card Access Control Systems",
+        "Surveillance Control Room Displays",
+        "High-Capacity Surveillance Storage",
+        "Complete CCTV Cabling, Setup & Integration"
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "/images/images1_2.jpeg",
+      "title": "Smart Classroom Setup",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images1_6.jpeg",
+      "title": "AV Integration & Controls",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images2_3.jpeg",
+      "title": "Institutional Desk Systems",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images2_4.jpeg",
+      "title": "Auditorium & Lecture Chairs",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images3_4.jpeg",
+      "title": "CCTV Control Room Screens",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images3_5.jpeg",
+      "title": "Surveillance Camera Installation",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images3_6.jpeg",
+      "title": "IT Rack & Server Infrastructure",
+      "imgHeight": "h-64"
+    },
+    {
+      "src": "/images/images1_3.jpeg",
+      "title": "Boardroom Audio System",
+      "imgHeight": "h-64"
+    }
+  ],
+  "partners": [
+    {
+      "src": "/images/images1_10.jpeg",
+      "name": "Partner Brand 1"
+    },
+    {
+      "src": "/images/images1_9.jpeg",
+      "name": "Partner Brand 2"
+    },
+    {
+      "src": "/images/images1_8.jpeg",
+      "name": "Partner Brand 3"
+    },
+    {
+      "src": "/images/images1_7.jpeg",
+      "name": "Partner Brand 4"
+    },
+    {
+      "src": "/images/images1_5.jpeg",
+      "name": "Partner Brand 5"
+    },
+    {
+      "src": "/images/images2_7.jpeg",
+      "name": "Partner Brand 6"
+    },
+    {
+      "src": "/images/images2_6.jpeg",
+      "name": "Partner Brand 7"
+    },
+    {
+      "src": "/images/images2_5.jpeg",
+      "name": "Partner Brand 8"
+    }
+  ]
+}
