@@ -9,8 +9,8 @@ export async function GET() {
   try {
     const data = await getContent();
     return NextResponse.json({ success: true, data });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: (error as Error).message }, { status: 500 });
   }
 }
 
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true, message: 'Content updated successfully in Redis' });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  } catch (error) {
+    return NextResponse.json({ success: false, error: (error as Error).message }, { status: 500 });
   }
 }

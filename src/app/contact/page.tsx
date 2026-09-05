@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getContent } from "@/lib/getContent";
 
 export const dynamic = 'force-dynamic';
