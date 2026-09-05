@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
 import { getContent } from '@/lib/getContent';
+
+const client = process.env.REDIS_URL ? createClient({ url: process.env.REDIS_URL }) : null;
+let isConnected = false;
 
 export async function GET() {
   try {
@@ -15,7 +18,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     
-    // Very basic password check - in real app use NextAuth or JWT
+    // Very basic password check
     if (body.password !== 'Rudra@123') {
       return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
@@ -24,10 +27,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'No data provided' }, { status: 400 });
     }
 
-    // Save new content to Vercel KV
-    await kv.set('rudraksh-content', body.data);
+    if (client) {
+      if (!isConnected) {
+        await client.connect();
+        isConnected = true;
+      }
+      
+      // Save new content to Redis
+      await client.set('rudraksh-content', JSON.stringify(body.data));
+    } else {
+      console.warn("No REDIS_URL found. Data cannot be saved permanently.");
+      return NextResponse.json({ success: false, error: 'Database not configured on server' }, { status: 500 });
+    }
 
-    return NextResponse.json({ success: true, message: 'Content updated successfully in Vercel KV' });
+    return NextResponse.json({ success: true, message: 'Content updated successfully in Redis' });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }

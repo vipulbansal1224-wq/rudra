@@ -1,19 +1,29 @@
 import fs from 'fs';
 import path from 'path';
-import { kv } from '@vercel/kv';
+import { createClient } from 'redis';
+
+const client = process.env.REDIS_URL ? createClient({ url: process.env.REDIS_URL }) : null;
+
+let isConnected = false;
 
 export async function getContent() {
   try {
-    // Try to get from Vercel KV first
-    const data = await kv.get('rudraksh-content');
-    if (data) {
-      return data;
+    if (client) {
+      if (!isConnected) {
+        await client.connect();
+        isConnected = true;
+      }
+      
+      const dataStr = await client.get('rudraksh-content');
+      if (dataStr) {
+        return JSON.parse(dataStr);
+      }
     }
   } catch (error) {
-    console.error("Vercel KV not configured or error fetching:", error);
+    console.error("Redis not configured or error fetching:", error);
   }
 
-  // Fallback to local JSON file (useful for first-time seeding)
+  // Fallback to local JSON file
   const filePath = path.join(process.cwd(), 'src', 'data', 'content.json');
   try {
     const fileContents = fs.readFileSync(filePath, 'utf8');
