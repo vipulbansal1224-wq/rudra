@@ -22,9 +22,18 @@ export async function getContent() {
             primary: "#1e3a8a",
             secondary: "#facc15",
             headingText: "#111827",
-            bodyText: "#4b5563"
+            bodyText: "#4b5563",
+            heroTitleSize: "60",
+            heroSubtitleSize: "20",
+            headingSize: "36",
+            bodySize: "16"
           };
         }
+        // Ensure new fields exist even if theme exists
+        parsed.theme.heroTitleSize = parsed.theme.heroTitleSize || "60";
+        parsed.theme.heroSubtitleSize = parsed.theme.heroSubtitleSize || "20";
+        parsed.theme.headingSize = parsed.theme.headingSize || "36";
+        parsed.theme.bodySize = parsed.theme.bodySize || "16";
         return parsed;
       }
     }
@@ -42,9 +51,17 @@ export async function getContent() {
         primary: "#1e3a8a",
         secondary: "#facc15",
         headingText: "#111827",
-        bodyText: "#4b5563"
+        bodyText: "#4b5563",
+        heroTitleSize: "60",
+        heroSubtitleSize: "20",
+        headingSize: "36",
+        bodySize: "16"
       };
     }
+    parsed.theme.heroTitleSize = parsed.theme.heroTitleSize || "60";
+    parsed.theme.heroSubtitleSize = parsed.theme.heroSubtitleSize || "20";
+    parsed.theme.headingSize = parsed.theme.headingSize || "36";
+    parsed.theme.bodySize = parsed.theme.bodySize || "16";
     return parsed;
   } catch (error) {
     console.error("Error reading fallback local content:", error);
