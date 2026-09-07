@@ -16,7 +16,16 @@ export async function getContent() {
       
       const dataStr = await client.get('rudraksh-content');
       if (dataStr) {
-        return JSON.parse(dataStr);
+        const parsed = JSON.parse(dataStr);
+        if (!parsed.theme) {
+          parsed.theme = {
+            primary: "#1e3a8a",
+            secondary: "#facc15",
+            headingText: "#111827",
+            bodyText: "#4b5563"
+          };
+        }
+        return parsed;
       }
     }
   } catch (error) {
@@ -27,7 +36,16 @@ export async function getContent() {
   const filePath = path.join(process.cwd(), 'src', 'data', 'content.json');
   try {
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(fileContents);
+    const parsed = JSON.parse(fileContents);
+    if (!parsed.theme) {
+      parsed.theme = {
+        primary: "#1e3a8a",
+        secondary: "#facc15",
+        headingText: "#111827",
+        bodyText: "#4b5563"
+      };
+    }
+    return parsed;
   } catch (error) {
     console.error("Error reading fallback local content:", error);
     return {};
