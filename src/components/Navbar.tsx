@@ -30,11 +30,15 @@ export default async function Navbar() {
           <img alt="Rudraksh Enterprises Logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain border border-gray-200 shadow-sm" src="/logo.png"/>
           <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-primary uppercase">Rudraksh Enterprises</span>
         </Link>
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-8 items-center">
           <Link className="text-sm font-semibold transition-colors duration-200 text-primary border-b-2 border-primary pb-1" href="/">Home</Link>
           <Link className="text-sm font-semibold transition-colors duration-200 text-text hover:text-primary" href="/services">Services</Link>
           <Link className="text-sm font-semibold transition-colors duration-200 text-text hover:text-primary" href="/about">About Us</Link>
           <Link className="text-sm font-semibold transition-colors duration-200 text-text hover:text-primary" href="/contact">Contact Us</Link>
+          <a className="text-xs font-bold bg-primary text-white px-3 py-1.5 rounded-md shadow-sm hover:bg-opacity-90 transition-all flex items-center gap-1.5" href="/Rudraksh_Catalogue.pdf" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            Download Catalogue
+          </a>
         </nav>
         <button className="md:hidden p-2 rounded-md hover:bg-gray-100 text-text focus:outline-none">
           <svg className="lucide lucide-menu w-6 h-6" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
