@@ -16,6 +16,15 @@ const config: Config = {
         heading: "var(--theme-heading, #111827)",
         text: "var(--theme-text, #4b5563)",
       },
+      animation: {
+        marquee: 'marquee 25s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
+      },
     },
   },
   plugins: [],
