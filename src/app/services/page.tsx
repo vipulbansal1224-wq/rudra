@@ -44,14 +44,28 @@ export default async function Page() {
                 </div>
                 <div className="lg:w-2/3">
                   <h3 className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-6">WHAT WE OFFER (Click for details)</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {service.items.map((item: string, itemIdx: number) => (
-                      <button key={itemIdx} className="flex items-center text-left space-x-3 text-sm text-gray-700 bg-white p-3 rounded-lg border border-gray-150 shadow-sm hover:border-primary hover:shadow-md transition-all group">
-                        <div className="w-1.5 h-1.5 bg-secondary rounded-full flex-shrink-0 group-hover:bg-primary transition-colors"></div>
-                        <span className="font-semibold flex-1 truncate">{item}</span>
-                        <span className="text-xs font-bold text-gray-400 group-hover:text-primary transition-colors">View →</span>
-                      </button>
-                    ))}
+                  <div className="grid grid-cols-1 gap-6">
+                    {service.items.map((item: any, itemIdx: number) => {
+                      const itemText = typeof item === 'string' ? item : (item.text || "");
+                      const itemImages = typeof item === 'string' ? [] : (item.images || []);
+                      return (
+                        <div key={itemIdx} className="flex flex-col bg-white p-4 rounded-xl border border-gray-150 shadow-sm hover:border-primary hover:shadow-md transition-all group">
+                          <div className="flex items-center text-left space-x-3 text-gray-700">
+                            <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0 group-hover:bg-primary transition-colors"></div>
+                            <span className="font-bold flex-1 text-base">{itemText}</span>
+                          </div>
+                          {itemImages.length > 0 && (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
+                              {itemImages.map((img: string, imgIdx: number) => (
+                                <div key={imgIdx} className="h-24 overflow-hidden rounded-lg border border-gray-100">
+                                  <img src={img} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt={itemText} />
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

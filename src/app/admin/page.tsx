@@ -110,8 +110,71 @@ export default function AdminPage() {
 
   const handleServiceItemChange = (serviceIndex: number, itemIndex: number, value: string) => {
     const newData = { ...data };
-    newData.services[serviceIndex].items[itemIndex] = value;
+    const currentItem = newData.services[serviceIndex].items[itemIndex];
+    if (typeof currentItem === 'string') {
+      newData.services[serviceIndex].items[itemIndex] = { text: value, images: [] };
+    } else {
+      newData.services[serviceIndex].items[itemIndex].text = value;
+    }
     setData(newData);
+  };
+
+  const handleServiceItemImageUpload = (e: React.ChangeEvent<HTMLInputElement>, serviceIndex: number, itemIndex: number) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+        
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+        
+        const newData = { ...data };
+        const currentItem = newData.services[serviceIndex].items[itemIndex];
+        if (typeof currentItem === 'string') {
+          newData.services[serviceIndex].items[itemIndex] = { text: currentItem, images: [dataUrl] };
+        } else {
+          if (!newData.services[serviceIndex].items[itemIndex].images) {
+            newData.services[serviceIndex].items[itemIndex].images = [];
+          }
+          newData.services[serviceIndex].items[itemIndex].images.push(dataUrl);
+        }
+        setData(newData);
+      };
+    };
+  };
+
+  const handleDeleteServiceItemImage = (serviceIndex: number, itemIndex: number, imageIndex: number) => {
+    if(confirm("Delete this image?")) {
+      const newData = { ...data };
+      newData.services[serviceIndex].items[itemIndex].images.splice(imageIndex, 1);
+      setData(newData);
+    }
   };
 
   const handleAddItem = (section: string, defaultItem: any) => {
@@ -131,7 +194,7 @@ export default function AdminPage() {
 
   const handleAddServiceItem = (serviceIndex: number) => {
     const newData = { ...data };
-    newData.services[serviceIndex].items.push("");
+    newData.services[serviceIndex].items.push({ text: "", images: [] });
     setData(newData);
   };
 
@@ -335,12 +398,32 @@ export default function AdminPage() {
                         <button onClick={() => handleAddServiceItem(sIdx)} className="text-blue-600 text-xs hover:underline">+ Add Point</button>
                       </div>
                       <div className="grid grid-cols-1 gap-2">
-                        {service.items?.map((item: string, iIdx: number) => (
-                          <div key={iIdx} className="flex space-x-2">
-                            <input type="text" value={item} onChange={(e) => handleServiceItemChange(sIdx, iIdx, e.target.value)} className="w-full border border-gray-300 rounded px-3 py-1.5 text-xs bg-gray-50" />
-                            <button onClick={() => handleDeleteServiceItem(sIdx, iIdx)} className="text-red-500 hover:text-red-700 p-1">✕</button>
-                          </div>
-                        ))}
+                        {service.items?.map((item: any, iIdx: number) => {
+                          const itemText = typeof item === 'string' ? item : (item.text || "");
+                          const itemImages = typeof item === 'string' ? [] : (item.images || []);
+                          return (
+                            <div key={iIdx} className="flex flex-col space-y-2 border border-gray-200 p-3 rounded bg-white">
+                              <div className="flex space-x-2">
+                                <input type="text" value={itemText} onChange={(e) => handleServiceItemChange(sIdx, iIdx, e.target.value)} className="w-full border border-gray-300 rounded px-3 py-1.5 text-xs bg-gray-50" placeholder="Bullet point text" />
+                                <button onClick={() => handleDeleteServiceItem(sIdx, iIdx)} className="text-red-500 hover:text-red-700 p-1 font-bold">✕</button>
+                              </div>
+                              <div className="pt-2 border-t border-gray-100">
+                                {itemImages.length > 0 && (
+                                  <div className="flex flex-wrap gap-2 mb-2">
+                                    {itemImages.map((img: string, imgIdx: number) => (
+                                      <div key={imgIdx} className="relative w-12 h-12 border border-gray-200 rounded overflow-hidden">
+                                        <img src={img} className="w-full h-full object-cover" />
+                                        <button onClick={() => handleDeleteServiceItemImage(sIdx, iIdx, imgIdx)} className="absolute top-0 right-0 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center">✕</button>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                                <label className="block text-[10px] font-semibold text-gray-500 mb-1">Add Image to Point</label>
+                                <input type="file" accept="image/*" onChange={(e) => handleServiceItemImageUpload(e, sIdx, iIdx)} className="w-full text-[10px] text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700" />
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
