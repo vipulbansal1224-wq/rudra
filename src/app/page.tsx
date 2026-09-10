@@ -53,7 +53,7 @@ export default async function Home() {
             <p className="text-text max-w-xl mx-auto" style={{ fontSize: 'var(--body-size)' }}>From consult to integration, we deliver high-performance products suited for your technical workspace.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.slice(0, 4).map((s: any, idx: number) => (
+            {services.map((s: any, idx: number) => (
               <Link key={idx} className="group relative h-64 bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-end text-decoration-none border border-gray-100 p-4" href={`/services#${s.id || ''}`}>
                 <img alt={s.title} className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300" src={s.image} />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent"></div>
@@ -146,7 +146,7 @@ export default async function Home() {
           </div>
           <div className="relative">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-500">
-              {gallery.slice(0, 4).map((img: any, idx: number) => (
+              {gallery.map((img: any, idx: number) => (
                 <div key={idx} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all group">
                   <div className="h-64 overflow-hidden bg-white flex items-center justify-center">
                     <img alt={img.title} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" src={img.src} />
