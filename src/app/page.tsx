@@ -140,7 +140,7 @@ export default async function Home() {
 
         <section className="py-20 max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="font-bold text-heading mb-4" style={{ fontSize: 'var(--heading-size)' }}>Our Installations</h2>
+            <h2 className="font-bold text-heading mb-4" style={{ fontSize: 'var(--heading-size)' }}>Our Customers</h2>
             <div className="w-12 h-1 bg-secondary mx-auto mb-4"></div>
             <p className="text-text max-w-xl mx-auto" style={{ fontSize: 'var(--body-size)' }}>A glimpse of our recent Audio-Visual integration, CCTV setups, and institutional workspace assemblies.</p>
           </div>
