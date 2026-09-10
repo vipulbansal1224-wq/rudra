@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Link from "next/link";
 import { getContent } from "@/lib/getContent";
+import ServiceItem from "@/components/ServiceItem";
 
 export const dynamic = 'force-dynamic';
 
@@ -49,21 +50,7 @@ export default async function Page() {
                       const itemText = typeof item === 'string' ? item : (item.text || "");
                       const itemImages = typeof item === 'string' ? [] : (item.images || []);
                       return (
-                        <div key={itemIdx} className="flex flex-col bg-white p-4 rounded-xl border border-gray-150 shadow-sm hover:border-primary hover:shadow-md transition-all group">
-                          <div className="flex items-center text-left space-x-3 text-gray-700">
-                            <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0 group-hover:bg-primary transition-colors"></div>
-                            <span className="font-bold flex-1 text-base">{itemText}</span>
-                          </div>
-                          {itemImages.length > 0 && (
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
-                              {itemImages.map((img: string, imgIdx: number) => (
-                                <div key={imgIdx} className="h-24 overflow-hidden rounded-lg border border-gray-100">
-                                  <img src={img} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt={itemText} />
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
+                        <ServiceItem key={itemIdx} itemText={itemText} itemImages={itemImages} />
                       );
                     })}
                   </div>
