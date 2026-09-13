@@ -60,40 +60,45 @@ export default async function Page() {
               <div className="bg-white p-8 md:p-10 rounded-2xl border border-gray-200 shadow-sm h-full">
                 <h3 className="text-2xl font-bold text-heading mb-2">Request Quote / Submit Query</h3>
                 <p className="text-text text-sm mb-8">Fill out the technical requirements form below. Our project engineer will call you back within 24 hours.</p>
-                <form className="space-y-6">
+                <form action="https://formsubmit.co/info@rudrakashenterprises.com" method="POST" className="space-y-6">
+                  {/* FormSubmit Configuration */}
+                  <input type="hidden" name="_subject" value="New Inquiry from Website Contact Form" />
+                  <input type="hidden" name="_next" value="https://www.rudrakashenterprises.com/contact" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                      <input className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter your name" required type="text" />
+                      <input name="Full_Name" className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter your name" required type="text" />
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
-                      <input className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter phone number" required type="tel" />
+                      <input name="Mobile_Number" className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter phone number" required type="tel" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                      <input className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter email address" type="email" />
+                      <input name="Email_Address" className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter email address" type="email" />
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Organization</label>
-                      <input className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter organization / school" type="text" />
+                      <input name="Organization" className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Enter organization / school" type="text" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Solutions Needed</label>
-                    <select className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary">
-                      <option value="all">Complete Technology Setup</option>
-                      <option value="av">Audio-Visual Integration</option>
-                      <option value="furniture">Institutional Furniture</option>
-                      <option value="it">IT Hardware Solutions</option>
-                      <option value="security">CCTV &amp; Surveillance</option>
+                    <select name="Solutions_Needed" className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary">
+                      <option value="Complete Technology Setup">Complete Technology Setup</option>
+                      <option value="Audio-Visual Integration">Audio-Visual Integration</option>
+                      <option value="Institutional Furniture">Institutional Furniture</option>
+                      <option value="IT Hardware Solutions">IT Hardware Solutions</option>
+                      <option value="CCTV & Surveillance">CCTV &amp; Surveillance</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Project Requirements</label>
-                    <textarea className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Describe your site details, specific requirements, number of components, or product models..." required rows={5}></textarea>
+                    <textarea name="Project_Requirements" className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary" placeholder="Describe your site details, specific requirements, number of components, or product models..." required rows={5}></textarea>
                   </div>
                   <button className="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3.5 px-6 rounded-lg transition-colors flex items-center justify-center text-sm" type="submit">
                     <svg className="lucide lucide-send w-4.5 h-4.5 mr-2" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
