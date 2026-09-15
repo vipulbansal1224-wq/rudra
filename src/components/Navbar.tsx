@@ -27,8 +27,8 @@ export default async function Navbar() {
       </div>
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <Link className="flex items-center space-x-3 text-decoration-none" href="/">
-          <img alt="Rudraksh Enterprises Logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain border border-gray-200 shadow-sm" src="/logo.png"/>
-          <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-primary uppercase">Rudraksh Enterprises</span>
+          <img alt="Rudraksh Enterprises Logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain border border-gray-200 shadow-sm" src="/logo-1.jpeg"/>
+          <img alt="Rudraksh Enterprises" className="h-6 sm:h-8 md:h-10 object-contain" src="/logo-2.jpeg"/>
         </Link>
         <nav className="hidden md:flex space-x-8 items-center">
           <Link className="text-sm font-semibold transition-colors duration-200 text-primary border-b-2 border-primary pb-1" href="/">Home</Link>
