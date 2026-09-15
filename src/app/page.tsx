@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Link from "next/link";
 import { getContent } from "@/lib/getContent";
+import PartnerMarquee from "@/components/PartnerMarquee";
 
 export const dynamic = 'force-dynamic';
 
@@ -166,15 +167,7 @@ export default async function Home() {
             <div className="w-12 h-1 bg-secondary mx-auto mb-4"></div>
             <p className="text-text max-w-xl mx-auto" style={{ fontSize: 'var(--body-size)' }}>We integrate high-performance products from trusted industry leading brands.</p>
           </div>
-          <div className="relative w-full overflow-hidden py-6 bg-gray-50 border-y border-gray-100 flex items-center">
-            <div className="animate-marquee flex whitespace-nowrap space-x-12 items-center">
-              {[...partners, ...partners, ...partners].map((partner: any, idx: number) => (
-                <div key={idx} className="flex-shrink-0 flex items-center justify-center bg-white p-4 h-24 w-44 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                  <img alt={partner.name} className="max-h-16 max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300" src={partner.src} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <PartnerMarquee partners={partners} />
         </section>
 
         <section className="bg-primary text-white py-16 px-4 text-center">
