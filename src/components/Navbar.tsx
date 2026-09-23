@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Link from "next/link";
 import { getContent } from "@/lib/getContent";
-
+import ConfettiLogo from "./ConfettiLogo";
 export default async function Navbar() {
   const content = await getContent();
   const contact = content.contact || {};
@@ -26,10 +26,7 @@ export default async function Navbar() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <Link className="flex items-center space-x-3 text-decoration-none" href="/">
-          <img alt="Rudraksh Enterprises Logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-contain border border-gray-200 shadow-sm" src="/logo.png"/>
-          <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-primary uppercase">Rudraksh Enterprises</span>
-        </Link>
+        <ConfettiLogo />
         <nav className="hidden md:flex space-x-8 items-center">
           <Link className="text-sm font-semibold transition-colors duration-200 text-primary border-b-2 border-primary pb-1" href="/">Home</Link>
           <Link className="text-sm font-semibold transition-colors duration-200 text-text hover:text-primary" href="/services">Services</Link>
