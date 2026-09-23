@@ -179,19 +179,23 @@ export default async function Home() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Media 1: Featured Image Showcase (vv-1.jpeg) */}
-              <div className="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group overflow-hidden">
-                <div className="relative rounded-xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center">
-                  <img src="/images/vv-1.jpeg" alt="Rudraksh Enterprises Infrastructure Showcase" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full mb-2 shadow">Technology Showcase</span>
-                    <h3 className="text-lg font-bold text-white drop-shadow">Enterprise AV &amp; Smart Office Setup</h3>
+              {/* Media 1: Live Video Tour 1 (vv-1.mp4) */}
+              <div className="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div className="relative rounded-xl overflow-hidden bg-black aspect-video flex items-center justify-center shadow-inner">
+                  <video controls autoPlay loop muted playsInline poster="/images/vv-1.jpeg" className="w-full h-full object-cover rounded-xl">
+                    <source src="/images/vv-1.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <div className="mt-4 px-2 flex items-center justify-between">
+                  <div>
+                    <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full mb-1">Live Video Tour 1</span>
+                    <h3 className="text-lg font-bold text-gray-900">Enterprise AV &amp; Smart Office Demonstration</h3>
                   </div>
                 </div>
               </div>
 
-              {/* Media 2: Live Video Tour (vv-2.mp4) */}
+              {/* Media 2: Live Video Tour 2 (vv-2.mp4) */}
               <div className="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 overflow-hidden">
                 <div className="relative rounded-xl overflow-hidden bg-black aspect-video flex items-center justify-center shadow-inner">
                   <video controls autoPlay loop muted playsInline poster="/images/vv-1.jpeg" className="w-full h-full object-cover rounded-xl">
@@ -201,7 +205,7 @@ export default async function Home() {
                 </div>
                 <div className="mt-4 px-2 flex items-center justify-between">
                   <div>
-                    <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full mb-1">Live Video Tour</span>
+                    <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full mb-1">Live Video Tour 2</span>
                     <h3 className="text-lg font-bold text-gray-900">Project Execution &amp; Infrastructure Demo</h3>
                   </div>
                 </div>
